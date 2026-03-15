@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.CoursController"
+            styleClass="root-pane"
+            stylesheets="@../styles/style.css"
+            prefWidth="860" prefHeight="600">
+
+    <top>
+        <VBox styleClass="sub-header">
+            <Label text="🏫  Gestion des Salles de Classe" styleClass="page-title"/>
+        </VBox>
+    </top>
+
+    <center>
+        <TabPane styleClass="main-tabs" tabClosingPolicy="UNAVAILABLE">
+
+            <Tab text="🏫  Salles">
+                <VBox spacing="20" styleClass="tab-content">
+                    <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+
+                    <VBox styleClass="form-card" spacing="14">
+                        <Label text="Nouvelle salle de classe" styleClass="form-title"/>
+                        <HBox spacing="16">
+                            <VBox spacing="6" HBox.hgrow="ALWAYS">
+                                <Label text="Nom de la salle *" styleClass="field-label"/>
+                                <TextField fx:id="fieldNomSalle" promptText="Ex: Amphi A, Salle 204, Labo Info..." styleClass="form-input"/>
+                            </VBox>
+                            <VBox spacing="6" prefWidth="200">
+                                <Label text="Capacité (places) *" styleClass="field-label"/>
+                                <TextField fx:id="fieldCapacite" promptText="Ex: 120" styleClass="form-input"/>
+                            </VBox>
+                        </HBox>
+                        <Button text="➕  Ajouter la salle" styleClass="btn-primary" onAction="#ajouterSalle"/>
+                    </VBox>
+
+                    <VBox styleClass="table-card" VBox.vgrow="ALWAYS" spacing="10">
+                        <Label text="Liste des salles disponibles" styleClass="card-title"/>
+                        <TableView fx:id="tableSalles" VBox.vgrow="ALWAYS" styleClass="data-table">
+                            <columns>
+                                <TableColumn fx:id="colSalleId" text="ID" prefWidth="60"/>
+                                <TableColumn fx:id="colSalleNom" text="Nom de la salle" prefWidth="380"/>
+                                <TableColumn fx:id="colSalleCap" text="Capacité" prefWidth="180"/>
+                            </columns>
+                            <placeholder><Label text="Aucune salle enregistrée." styleClass="empty-label"/></placeholder>
+                        </TableView>
+                        <Button text="🗑  Supprimer la sélection" styleClass="btn-danger" onAction="#supprimerSalle"/>
+                    </VBox>
+                </VBox>
+            </Tab>
+
+            <!-- Onglets cachés requis par le contrôleur CoursController -->
+            <Tab text="📚  Cours" style="-fx-pref-width: 0; -fx-min-width: 0; -fx-max-height: 0;">
+                <VBox styleClass="tab-content">
+                    <padding><Insets top="10" right="10" bottom="10" left="10"/></padding>
+                    <TextField fx:id="fieldNomCours" visible="false" managed="false"/>
+                    <TextArea fx:id="fieldDescCours" visible="false" managed="false"/>
+                    <TableView fx:id="tableCours" visible="false" managed="false">
+                        <columns>
+                            <TableColumn fx:id="colCoursId"/>
+                            <TableColumn fx:id="colCoursNom"/>
+                            <TableColumn fx:id="colCoursDesc"/>
+                        </columns>
+                    </TableView>
+                </VBox>
+            </Tab>
+
+            <Tab text="👨‍🏫  Enseignants" style="-fx-pref-width: 0; -fx-min-width: 0; -fx-max-height: 0;">
+                <VBox styleClass="tab-content">
+                    <padding><Insets top="10" right="10" bottom="10" left="10"/></padding>
+                    <TextField fx:id="fieldNomEns" visible="false" managed="false"/>
+                    <TextField fx:id="fieldPrenomEns" visible="false" managed="false"/>
+                    <TextField fx:id="fieldEmailEns" visible="false" managed="false"/>
+                    <TableView fx:id="tableEnseignants" visible="false" managed="false">
+                        <columns>
+                            <TableColumn fx:id="colEnsId"/>
+                            <TableColumn fx:id="colEnsNom"/>
+                            <TableColumn fx:id="colEnsPrenom"/>
+                            <TableColumn fx:id="colEnsEmail"/>
+                        </columns>
+                    </TableView>
+                </VBox>
+            </Tab>
+        </TabPane>
+    </center>
+
+    <bottom>
+        <HBox styleClass="status-bar" alignment="CENTER_LEFT">
+            <padding><Insets top="8" right="16" bottom="8" left="16"/></padding>
+            <Label fx:id="statusLabel" text="" styleClass="status-label"/>
+        </HBox>
+    </bottom>
+</BorderPane>

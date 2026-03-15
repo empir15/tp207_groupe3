@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<!--
+    AjouterEnseignant.fxml est intégré dans AjouterCours.fxml (onglet Enseignants).
+    Ce fichier est un alias pour ouvrir la même vue avec focus sur l'onglet enseignant.
+    Le contrôleur CoursController gère les trois onglets.
+-->
+<BorderPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.CoursController"
+            styleClass="root-pane"
+            stylesheets="@../styles/style.css"
+            prefWidth="900" prefHeight="680">
+
+    <top>
+        <VBox styleClass="sub-header">
+            <Label text="👨‍🏫  Gestion des Enseignants" styleClass="page-title"/>
+        </VBox>
+    </top>
+
+    <center>
+        <TabPane styleClass="main-tabs" tabClosingPolicy="UNAVAILABLE">
+
+            <Tab text="👨‍🏫  Enseignants">
+                <VBox spacing="20" styleClass="tab-content">
+                    <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+
+                    <VBox styleClass="form-card" spacing="14">
+                        <Label text="Nouvel enseignant" styleClass="form-title"/>
+                        <HBox spacing="12">
+                            <VBox spacing="6" HBox.hgrow="ALWAYS">
+                                <Label text="Nom *" styleClass="field-label"/>
+                                <TextField fx:id="fieldNomEns" promptText="Nom de famille" styleClass="form-input"/>
+                            </VBox>
+                            <VBox spacing="6" HBox.hgrow="ALWAYS">
+                                <Label text="Prénom *" styleClass="field-label"/>
+                                <TextField fx:id="fieldPrenomEns" promptText="Prénom" styleClass="form-input"/>
+                            </VBox>
+                        </HBox>
+                        <VBox spacing="6">
+                            <Label text="Email *" styleClass="field-label"/>
+                            <TextField fx:id="fieldEmailEns" promptText="email@universite.fr" styleClass="form-input"/>
+                        </VBox>
+                        <Button text="➕  Ajouter l'enseignant" styleClass="btn-primary" onAction="#ajouterEnseignant"/>
+                    </VBox>
+
+                    <VBox styleClass="table-card" VBox.vgrow="ALWAYS" spacing="10">
+                        <Label text="Liste des enseignants" styleClass="card-title"/>
+                        <TableView fx:id="tableEnseignants" VBox.vgrow="ALWAYS" styleClass="data-table">
+                            <columns>
+                                <TableColumn fx:id="colEnsId" text="ID" prefWidth="60"/>
+                                <TableColumn fx:id="colEnsNom" text="Nom" prefWidth="200"/>
+                                <TableColumn fx:id="colEnsPrenom" text="Prénom" prefWidth="200"/>
+                                <TableColumn fx:id="colEnsEmail" text="Email" prefWidth="280"/>
+                            </columns>
+                            <placeholder><Label text="Aucun enseignant enregistré." styleClass="empty-label"/></placeholder>
+                        </TableView>
+                        <Button text="🗑  Supprimer" styleClass="btn-danger" onAction="#supprimerEnseignant"/>
+                    </VBox>
+                </VBox>
+            </Tab>
+
+            <Tab text="📚  Cours">
+                <VBox spacing="20" styleClass="tab-content">
+                    <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+                    <VBox styleClass="form-card" spacing="14">
+                        <Label text="Nouveau cours" styleClass="form-title"/>
+                        <VBox spacing="6">
+                            <Label text="Nom du cours *" styleClass="field-label"/>
+                            <TextField fx:id="fieldNomCours" promptText="Ex: Mathématiques" styleClass="form-input"/>
+                        </VBox>
+                        <VBox spacing="6">
+                            <Label text="Description" styleClass="field-label"/>
+                            <TextArea fx:id="fieldDescCours" promptText="Description..." styleClass="form-textarea" prefRowCount="3"/>
+                        </VBox>
+                        <Button text="➕  Ajouter le cours" styleClass="btn-primary" onAction="#ajouterCours"/>
+                    </VBox>
+                    <VBox styleClass="table-card" VBox.vgrow="ALWAYS" spacing="10">
+                        <Label text="Liste des cours" styleClass="card-title"/>
+                        <TableView fx:id="tableCours" VBox.vgrow="ALWAYS" styleClass="data-table">
+                            <columns>
+                                <TableColumn fx:id="colCoursId" text="ID" prefWidth="60"/>
+                                <TableColumn fx:id="colCoursNom" text="Nom" prefWidth="260"/>
+                                <TableColumn fx:id="colCoursDesc" text="Description" prefWidth="380"/>
+                            </columns>
+                        </TableView>
+                        <Button text="🗑  Supprimer" styleClass="btn-danger" onAction="#supprimerCours"/>
+                    </VBox>
+                </VBox>
+            </Tab>
+
+            <Tab text="🏫  Salles">
+                <VBox spacing="20" styleClass="tab-content">
+                    <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+                    <VBox styleClass="form-card" spacing="14">
+                        <Label text="Nouvelle salle" styleClass="form-title"/>
+                        <HBox spacing="12">
+                            <VBox spacing="6" HBox.hgrow="ALWAYS">
+                                <Label text="Nom *" styleClass="field-label"/>
+                                <TextField fx:id="fieldNomSalle" promptText="Ex: Amphi A" styleClass="form-input"/>
+                            </VBox>
+                            <VBox spacing="6" prefWidth="180">
+                                <Label text="Capacité *" styleClass="field-label"/>
+                                <TextField fx:id="fieldCapacite" promptText="120" styleClass="form-input"/>
+                            </VBox>
+                        </HBox>
+                        <Button text="➕  Ajouter la salle" styleClass="btn-primary" onAction="#ajouterSalle"/>
+                    </VBox>
+                    <VBox styleClass="table-card" VBox.vgrow="ALWAYS" spacing="10">
+                        <Label text="Liste des salles" styleClass="card-title"/>
+                        <TableView fx:id="tableSalles" VBox.vgrow="ALWAYS" styleClass="data-table">
+                            <columns>
+                                <TableColumn fx:id="colSalleId" text="ID" prefWidth="60"/>
+                                <TableColumn fx:id="colSalleNom" text="Nom" prefWidth="300"/>
+                                <TableColumn fx:id="colSalleCap" text="Capacité" prefWidth="150"/>
+                            </columns>
+                        </TableView>
+                        <Button text="🗑  Supprimer" styleClass="btn-danger" onAction="#supprimerSalle"/>
+                    </VBox>
+                </VBox>
+            </Tab>
+        </TabPane>
+    </center>
+
+    <bottom>
+        <HBox styleClass="status-bar" alignment="CENTER_LEFT">
+            <padding><Insets top="8" right="16" bottom="8" left="16"/></padding>
+            <Label fx:id="statusLabel" text="" styleClass="status-label"/>
+        </HBox>
+    </bottom>
+</BorderPane>

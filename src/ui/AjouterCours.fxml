@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.CoursController"
+            styleClass="root-pane"
+            stylesheets="@../styles/style.css"
+            prefWidth="900" prefHeight="680">
+
+    <top>
+        <VBox styleClass="sub-header">
+            <Label text="📚  Gestion des Cours, Enseignants &amp; Salles" styleClass="page-title"/>
+        </VBox>
+    </top>
+
+    <center>
+        <TabPane styleClass="main-tabs" tabClosingPolicy="UNAVAILABLE">
+
+            <!-- ============== ONGLET COURS ============== -->
+            <Tab text="📚  Cours">
+                <VBox spacing="20" styleClass="tab-content">
+                    <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+
+                    <!-- Formulaire ajout -->
+                    <VBox styleClass="form-card" spacing="14">
+                        <Label text="Nouveau cours" styleClass="form-title"/>
+                        <HBox spacing="12" alignment="CENTER_LEFT">
+                            <VBox spacing="6" HBox.hgrow="ALWAYS">
+                                <Label text="Nom du cours *" styleClass="field-label"/>
+                                <TextField fx:id="fieldNomCours" promptText="Ex: Mathématiques Avancées" styleClass="form-input"/>
+                            </VBox>
+                        </HBox>
+                        <VBox spacing="6">
+                            <Label text="Description" styleClass="field-label"/>
+                            <TextArea fx:id="fieldDescCours" promptText="Description du cours..." styleClass="form-textarea"
+                                      prefRowCount="3" wrapText="true"/>
+                        </VBox>
+                        <HBox spacing="12">
+                            <Button text="➕  Ajouter le cours" styleClass="btn-primary" onAction="#ajouterCours"/>
+                        </HBox>
+                    </VBox>
+
+                    <!-- Table -->
+                    <VBox styleClass="table-card" VBox.vgrow="ALWAYS" spacing="10">
+                        <Label text="Liste des cours" styleClass="card-title"/>
+                        <TableView fx:id="tableCours" VBox.vgrow="ALWAYS" styleClass="data-table">
+                            <columns>
+                                <TableColumn fx:id="colCoursId" text="ID" prefWidth="60"/>
+                                <TableColumn fx:id="colCoursNom" text="Nom" prefWidth="280"/>
+                                <TableColumn fx:id="colCoursDesc" text="Description" prefWidth="400"/>
+                            </columns>
+                            <placeholder><Label text="Aucun cours enregistré." styleClass="empty-label"/></placeholder>
+                        </TableView>
+                        <Button text="🗑  Supprimer" styleClass="btn-danger" onAction="#supprimerCours"/>
+                    </VBox>
+                </VBox>
+            </Tab>
+
+            <!-- ============== ONGLET ENSEIGNANTS ============== -->
+            <Tab text="👨‍🏫  Enseignants">
+                <VBox spacing="20" styleClass="tab-content">
+                    <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+
+                    <VBox styleClass="form-card" spacing="14">
+                        <Label text="Nouvel enseignant" styleClass="form-title"/>
+                        <HBox spacing="12">
+                            <VBox spacing="6" HBox.hgrow="ALWAYS">
+                                <Label text="Nom *" styleClass="field-label"/>
+                                <TextField fx:id="fieldNomEns" promptText="Nom de famille" styleClass="form-input"/>
+                            </VBox>
+                            <VBox spacing="6" HBox.hgrow="ALWAYS">
+                                <Label text="Prénom *" styleClass="field-label"/>
+                                <TextField fx:id="fieldPrenomEns" promptText="Prénom" styleClass="form-input"/>
+                            </VBox>
+                        </HBox>
+                        <VBox spacing="6">
+                            <Label text="Email *" styleClass="field-label"/>
+                            <TextField fx:id="fieldEmailEns" promptText="email@universite.fr" styleClass="form-input"/>
+                        </VBox>
+                        <Button text="➕  Ajouter l'enseignant" styleClass="btn-primary" onAction="#ajouterEnseignant"/>
+                    </VBox>
+
+                    <VBox styleClass="table-card" VBox.vgrow="ALWAYS" spacing="10">
+                        <Label text="Liste des enseignants" styleClass="card-title"/>
+                        <TableView fx:id="tableEnseignants" VBox.vgrow="ALWAYS" styleClass="data-table">
+                            <columns>
+                                <TableColumn fx:id="colEnsId" text="ID" prefWidth="60"/>
+                                <TableColumn fx:id="colEnsNom" text="Nom" prefWidth="180"/>
+                                <TableColumn fx:id="colEnsPrenom" text="Prénom" prefWidth="180"/>
+                                <TableColumn fx:id="colEnsEmail" text="Email" prefWidth="280"/>
+                            </columns>
+                            <placeholder><Label text="Aucun enseignant enregistré." styleClass="empty-label"/></placeholder>
+                        </TableView>
+                        <Button text="🗑  Supprimer" styleClass="btn-danger" onAction="#supprimerEnseignant"/>
+                    </VBox>
+                </VBox>
+            </Tab>
+
+            <!-- ============== ONGLET SALLES ============== -->
+            <Tab text="🏫  Salles">
+                <VBox spacing="20" styleClass="tab-content">
+                    <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+
+                    <VBox styleClass="form-card" spacing="14">
+                        <Label text="Nouvelle salle" styleClass="form-title"/>
+                        <HBox spacing="12">
+                            <VBox spacing="6" HBox.hgrow="ALWAYS">
+                                <Label text="Nom de la salle *" styleClass="field-label"/>
+                                <TextField fx:id="fieldNomSalle" promptText="Ex: Amphi A, Salle 101..." styleClass="form-input"/>
+                            </VBox>
+                            <VBox spacing="6" prefWidth="180">
+                                <Label text="Capacité *" styleClass="field-label"/>
+                                <TextField fx:id="fieldCapacite" promptText="Ex: 120" styleClass="form-input"/>
+                            </VBox>
+                        </HBox>
+                        <Button text="➕  Ajouter la salle" styleClass="btn-primary" onAction="#ajouterSalle"/>
+                    </VBox>
+
+                    <VBox styleClass="table-card" VBox.vgrow="ALWAYS" spacing="10">
+                        <Label text="Liste des salles" styleClass="card-title"/>
+                        <TableView fx:id="tableSalles" VBox.vgrow="ALWAYS" styleClass="data-table">
+                            <columns>
+                                <TableColumn fx:id="colSalleId" text="ID" prefWidth="60"/>
+                                <TableColumn fx:id="colSalleNom" text="Nom" prefWidth="300"/>
+                                <TableColumn fx:id="colSalleCap" text="Capacité" prefWidth="150"/>
+                            </columns>
+                            <placeholder><Label text="Aucune salle enregistrée." styleClass="empty-label"/></placeholder>
+                        </TableView>
+                        <Button text="🗑  Supprimer" styleClass="btn-danger" onAction="#supprimerSalle"/>
+                    </VBox>
+                </VBox>
+            </Tab>
+        </TabPane>
+    </center>
+
+    <bottom>
+        <HBox styleClass="status-bar" alignment="CENTER_LEFT">
+            <padding><Insets top="8" right="16" bottom="8" left="16"/></padding>
+            <Label fx:id="statusLabel" text="" styleClass="status-label"/>
+        </HBox>
+    </bottom>
+
+</BorderPane>

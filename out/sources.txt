@@ -1,0 +1,12 @@
+C:\Users\teemm\Videos\tp207\src\MainApp.java
+C:\Users\teemm\Videos\tp207\src\controller\CoursController.java
+C:\Users\teemm\Videos\tp207\src\controller\DashboardController.java
+C:\Users\teemm\Videos\tp207\src\controller\ExamenController.java
+C:\Users\teemm\Videos\tp207\src\controller\PlanningController.java
+C:\Users\teemm\Videos\tp207\src\database\DatabaseConnection.java
+C:\Users\teemm\Videos\tp207\src\model\Cours.java
+C:\Users\teemm\Videos\tp207\src\model\Enseignant.java
+C:\Users\teemm\Videos\tp207\src\model\Examen.java
+C:\Users\teemm\Videos\tp207\src\model\Planning.java
+C:\Users\teemm\Videos\tp207\src\model\Salle.java
+C:\Users\teemm\Videos\tp207\src\service\PlanningService.java

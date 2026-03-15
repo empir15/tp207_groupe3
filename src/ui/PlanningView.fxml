@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.PlanningController"
+            styleClass="root-pane"
+            stylesheets="@../styles/style.css"
+            prefWidth="950" prefHeight="680">
+
+    <top>
+        <VBox styleClass="sub-header">
+            <Label text="📅  Gestion des Horaires" styleClass="page-title"/>
+        </VBox>
+    </top>
+
+    <center>
+        <VBox spacing="20" styleClass="main-content">
+            <padding><Insets top="24" right="24" bottom="24" left="24"/></padding>
+
+            <!-- Formulaire -->
+            <VBox styleClass="form-card" spacing="16">
+                <Label text="Créer un nouvel horaire" styleClass="form-title"/>
+                <GridPane hgap="16" vgap="12">
+                    <columnConstraints>
+                        <ColumnConstraints percentWidth="33"/>
+                        <ColumnConstraints percentWidth="33"/>
+                        <ColumnConstraints percentWidth="34"/>
+                    </columnConstraints>
+
+                    <VBox spacing="6" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                        <Label text="Cours *" styleClass="field-label"/>
+                        <ComboBox fx:id="comboCours" styleClass="form-combo" maxWidth="Infinity"/>
+                    </VBox>
+                    <VBox spacing="6" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                        <Label text="Enseignant *" styleClass="field-label"/>
+                        <ComboBox fx:id="comboEnseignant" styleClass="form-combo" maxWidth="Infinity"/>
+                    </VBox>
+                    <VBox spacing="6" GridPane.columnIndex="2" GridPane.rowIndex="0">
+                        <Label text="Salle *" styleClass="field-label"/>
+                        <ComboBox fx:id="comboSalle" styleClass="form-combo" maxWidth="Infinity"/>
+                    </VBox>
+                    <VBox spacing="6" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                        <Label text="Jour *" styleClass="field-label"/>
+                        <ComboBox fx:id="comboJour" styleClass="form-combo" maxWidth="Infinity"/>
+                    </VBox>
+                    <VBox spacing="6" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <Label text="Heure *" styleClass="field-label"/>
+                        <ComboBox fx:id="comboHeure" styleClass="form-combo" maxWidth="Infinity"/>
+                    </VBox>
+                    <HBox alignment="BOTTOM_LEFT" spacing="10" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                        <Button text="➕  Créer l'horaire" styleClass="btn-primary" onAction="#ajouterPlanning"/>
+                    </HBox>
+                </GridPane>
+            </VBox>
+
+            <!-- Table -->
+            <VBox VBox.vgrow="ALWAYS" styleClass="table-card" spacing="12">
+                <Label text="Horaires planifiés" styleClass="card-title"/>
+                <TableView fx:id="tablePlanning" VBox.vgrow="ALWAYS" styleClass="data-table">
+                    <columns>
+                        <TableColumn fx:id="colId" text="ID" prefWidth="55"/>
+                        <TableColumn fx:id="colCours" text="Cours" prefWidth="200"/>
+                        <TableColumn fx:id="colEnseignant" text="Enseignant" prefWidth="180"/>
+                        <TableColumn fx:id="colSalle" text="Salle" prefWidth="140"/>
+                        <TableColumn fx:id="colJour" text="Jour" prefWidth="110"/>
+                        <TableColumn fx:id="colHeure" text="Heure" prefWidth="90"/>
+                    </columns>
+                    <placeholder><Label text="Aucun horaire planifié." styleClass="empty-label"/></placeholder>
+                </TableView>
+                <Button text="🗑  Supprimer la sélection" styleClass="btn-danger" onAction="#supprimerPlanning"/>
+            </VBox>
+        </VBox>
+    </center>
+
+    <bottom>
+        <HBox styleClass="status-bar" alignment="CENTER_LEFT">
+            <padding><Insets top="8" right="16" bottom="8" left="16"/></padding>
+            <Label fx:id="statusLabel" text="" styleClass="status-label"/>
+        </HBox>
+    </bottom>
+
+</BorderPane>

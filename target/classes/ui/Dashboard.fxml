@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.DashboardController"
+            styleClass="root-pane"
+            stylesheets="@../styles/style.css">
+
+    <!-- ===== HEADER ===== -->
+    <top>
+        <VBox styleClass="header">
+            <HBox alignment="CENTER_LEFT" spacing="16">
+                <Label text="🎓" style="-fx-font-size: 32px;"/>
+                <VBox>
+                    <Label text="PlanifyEdu" styleClass="app-title"/>
+                    <Label text="Système de gestion de planification universitaire" styleClass="app-subtitle"/>
+                </VBox>
+            </HBox>
+        </VBox>
+    </top>
+
+    <!-- ===== CONTENU PRINCIPAL ===== -->
+    <center>
+        <ScrollPane fitToWidth="true" styleClass="scroll-area">
+            <VBox spacing="32" styleClass="main-content">
+                <padding><Insets top="32" right="32" bottom="32" left="32"/></padding>
+
+                <!-- Statistiques -->
+                <VBox spacing="12">
+                    <Label text="Vue d'ensemble" styleClass="section-title"/>
+                    <HBox spacing="16" alignment="CENTER_LEFT">
+                        <VBox styleClass="stat-card" alignment="CENTER">
+                            <Label text="📚" styleClass="stat-icon"/>
+                            <Label fx:id="labelCours" text="0" styleClass="stat-number"/>
+                            <Label text="Cours" styleClass="stat-label"/>
+                        </VBox>
+                        <VBox styleClass="stat-card" alignment="CENTER">
+                            <Label text="👨‍🏫" styleClass="stat-icon"/>
+                            <Label fx:id="labelEnseignants" text="0" styleClass="stat-number"/>
+                            <Label text="Enseignants" styleClass="stat-label"/>
+                        </VBox>
+                        <VBox styleClass="stat-card" alignment="CENTER">
+                            <Label text="🏫" styleClass="stat-icon"/>
+                            <Label fx:id="labelSalles" text="0" styleClass="stat-number"/>
+                            <Label text="Salles" styleClass="stat-label"/>
+                        </VBox>
+                        <VBox styleClass="stat-card" alignment="CENTER">
+                            <Label text="📅" styleClass="stat-icon"/>
+                            <Label fx:id="labelPlannings" text="0" styleClass="stat-number"/>
+                            <Label text="Horaires" styleClass="stat-label"/>
+                        </VBox>
+                        <VBox styleClass="stat-card" alignment="CENTER">
+                            <Label text="📝" styleClass="stat-icon"/>
+                            <Label fx:id="labelExamens" text="0" styleClass="stat-number"/>
+                            <Label text="Examens" styleClass="stat-label"/>
+                        </VBox>
+                    </HBox>
+                </VBox>
+
+                <!-- Actions rapides -->
+                <VBox spacing="12">
+                    <Label text="Actions rapides" styleClass="section-title"/>
+                    <GridPane hgap="16" vgap="16">
+                        <columnConstraints>
+                            <ColumnConstraints percentWidth="33.33"/>
+                            <ColumnConstraints percentWidth="33.33"/>
+                            <ColumnConstraints percentWidth="33.33"/>
+                        </columnConstraints>
+
+                        <VBox styleClass="action-card" onMouseClicked="#ouvrirAjouterCours" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                            <Label text="📚" styleClass="action-icon"/>
+                            <Label text="Ajouter un cours" styleClass="action-title"/>
+                            <Label text="Créer un nouveau cours dans le catalogue" styleClass="action-desc"/>
+                        </VBox>
+
+                        <VBox styleClass="action-card" onMouseClicked="#ouvrirAjouterEnseignant" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                            <Label text="👨‍🏫" styleClass="action-icon"/>
+                            <Label text="Ajouter un enseignant" styleClass="action-title"/>
+                            <Label text="Enregistrer un nouvel enseignant" styleClass="action-desc"/>
+                        </VBox>
+
+                        <VBox styleClass="action-card" onMouseClicked="#ouvrirAjouterSalle" GridPane.columnIndex="2" GridPane.rowIndex="0">
+                            <Label text="🏫" styleClass="action-icon"/>
+                            <Label text="Ajouter une salle" styleClass="action-title"/>
+                            <Label text="Configurer une nouvelle salle de classe" styleClass="action-desc"/>
+                        </VBox>
+
+                        <VBox styleClass="action-card accent-card" onMouseClicked="#ouvrirCreerHoraire" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                            <Label text="📅" styleClass="action-icon"/>
+                            <Label text="Créer un horaire" styleClass="action-title"/>
+                            <Label text="Planifier un cours pour un enseignant" styleClass="action-desc"/>
+                        </VBox>
+
+                        <VBox styleClass="action-card accent-card" onMouseClicked="#ouvrirPlanifierExamen" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                            <Label text="📝" styleClass="action-icon"/>
+                            <Label text="Planifier un examen" styleClass="action-title"/>
+                            <Label text="Programmer un examen dans une salle" styleClass="action-desc"/>
+                        </VBox>
+
+                        <VBox styleClass="action-card view-card" onMouseClicked="#ouvrirVoirHoraires" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                            <Label text="🗓" styleClass="action-icon"/>
+                            <Label text="Voir les horaires" styleClass="action-title"/>
+                            <Label text="Visualiser tous les plannings" styleClass="action-desc"/>
+                        </VBox>
+                    </GridPane>
+                </VBox>
+
+            </VBox>
+        </ScrollPane>
+    </center>
+
+    <!-- ===== FOOTER ===== -->
+    <bottom>
+        <HBox styleClass="footer" alignment="CENTER">
+            <Label text="PlanifyEdu v1.0 — Système de gestion universitaire" styleClass="footer-text"/>
+        </HBox>
+    </bottom>
+
+</BorderPane>

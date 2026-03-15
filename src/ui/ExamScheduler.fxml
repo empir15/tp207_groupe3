@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.ExamenController"
+            styleClass="root-pane"
+            stylesheets="@../styles/style.css"
+            prefWidth="900" prefHeight="620">
+
+    <top>
+        <VBox styleClass="sub-header">
+            <Label text="📝  Planification des Examens" styleClass="page-title"/>
+        </VBox>
+    </top>
+
+    <center>
+        <VBox spacing="20" styleClass="main-content">
+            <padding><Insets top="24" right="24" bottom="24" left="24"/></padding>
+
+            <!-- Formulaire -->
+            <VBox styleClass="form-card" spacing="16">
+                <Label text="Programmer un examen" styleClass="form-title"/>
+                <GridPane hgap="16" vgap="12">
+                    <columnConstraints>
+                        <ColumnConstraints percentWidth="50"/>
+                        <ColumnConstraints percentWidth="50"/>
+                    </columnConstraints>
+
+                    <VBox spacing="6" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                        <Label text="Cours concerné *" styleClass="field-label"/>
+                        <ComboBox fx:id="comboCours" styleClass="form-combo" maxWidth="Infinity"/>
+                    </VBox>
+                    <VBox spacing="6" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                        <Label text="Salle d'examen *" styleClass="field-label"/>
+                        <ComboBox fx:id="comboSalle" styleClass="form-combo" maxWidth="Infinity"/>
+                    </VBox>
+                    <VBox spacing="6" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                        <Label text="Date de l'examen *" styleClass="field-label"/>
+                        <DatePicker fx:id="dateExamen" styleClass="form-datepicker" maxWidth="Infinity"/>
+                    </VBox>
+                    <VBox spacing="6" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <Label text="Heure *" styleClass="field-label"/>
+                        <ComboBox fx:id="comboHeure" styleClass="form-combo" maxWidth="Infinity"/>
+                    </VBox>
+                </GridPane>
+                <Button text="➕  Planifier l'examen" styleClass="btn-primary" onAction="#ajouterExamen"/>
+            </VBox>
+
+            <!-- Table -->
+            <VBox VBox.vgrow="ALWAYS" styleClass="table-card" spacing="12">
+                <Label text="Examens planifiés" styleClass="card-title"/>
+                <TableView fx:id="tableExamens" VBox.vgrow="ALWAYS" styleClass="data-table">
+                    <columns>
+                        <TableColumn fx:id="colId" text="ID" prefWidth="55"/>
+                        <TableColumn fx:id="colCours" text="Cours" prefWidth="220"/>
+                        <TableColumn fx:id="colDate" text="Date" prefWidth="130"/>
+                        <TableColumn fx:id="colHeure" text="Heure" prefWidth="100"/>
+                        <TableColumn fx:id="colSalle" text="Salle" prefWidth="200"/>
+                    </columns>
+                    <placeholder><Label text="Aucun examen planifié." styleClass="empty-label"/></placeholder>
+                </TableView>
+                <Button text="🗑  Supprimer la sélection" styleClass="btn-danger" onAction="#supprimerExamen"/>
+            </VBox>
+        </VBox>
+    </center>
+
+    <bottom>
+        <HBox styleClass="status-bar" alignment="CENTER_LEFT">
+            <padding><Insets top="8" right="16" bottom="8" left="16"/></padding>
+            <Label fx:id="statusLabel" text="" styleClass="status-label"/>
+        </HBox>
+    </bottom>
+
+</BorderPane>

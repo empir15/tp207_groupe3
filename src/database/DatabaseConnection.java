@@ -45,53 +45,71 @@ public class DatabaseConnection {
     }
 
     private void createTables() throws SQLException {
+
+        // --- Tables de ressources (inchangées) ---
         String createCourses = """
                     CREATE TABLE IF NOT EXISTS courses (
-                        id INTEGER PRIMARY KEY AUTOINCREMENT,
-                        nom TEXT NOT NULL,
+                        id          INTEGER PRIMARY KEY AUTOINCREMENT,
+                        nom         TEXT NOT NULL,
                         description TEXT
                     );
                 """;
 
         String createTeachers = """
                     CREATE TABLE IF NOT EXISTS teachers (
-                        id INTEGER PRIMARY KEY AUTOINCREMENT,
-                        nom TEXT NOT NULL,
-                        prenom TEXT NOT NULL,
-                        email TEXT NOT NULL
+                        id      INTEGER PRIMARY KEY AUTOINCREMENT,
+                        nom     TEXT NOT NULL,
+                        prenom  TEXT NOT NULL,
+                        email   TEXT NOT NULL
                     );
                 """;
 
         String createClassrooms = """
                     CREATE TABLE IF NOT EXISTS classrooms (
-                        id INTEGER PRIMARY KEY AUTOINCREMENT,
-                        nom TEXT NOT NULL,
+                        id       INTEGER PRIMARY KEY AUTOINCREMENT,
+                        nom      TEXT NOT NULL,
                         capacite INTEGER NOT NULL
                     );
                 """;
 
+        // --- NOUVEAU : Table des groupes d'étudiants ---
+        String createGroupes = """
+                    CREATE TABLE IF NOT EXISTS groupes (
+                        id            INTEGER PRIMARY KEY AUTOINCREMENT,
+                        nom           TEXT NOT NULL,
+                        niveau        TEXT NOT NULL,
+                        annee_scolaire TEXT NOT NULL
+                    );
+                """;
+
+        // --- Table planning enrichie ---
         String createPlanning = """
                     CREATE TABLE IF NOT EXISTS planning (
-                        id INTEGER PRIMARY KEY AUTOINCREMENT,
-                        course_id INTEGER NOT NULL,
-                        teacher_id INTEGER NOT NULL,
+                        id           INTEGER PRIMARY KEY AUTOINCREMENT,
+                        course_id    INTEGER NOT NULL,
+                        teacher_id   INTEGER NOT NULL,
                         classroom_id INTEGER NOT NULL,
-                        jour TEXT NOT NULL,
-                        heure TEXT NOT NULL,
-                        FOREIGN KEY (course_id) REFERENCES courses(id),
-                        FOREIGN KEY (teacher_id) REFERENCES teachers(id),
-                        FOREIGN KEY (classroom_id) REFERENCES classrooms(id)
+                        groupe_id    INTEGER,
+                        jour         TEXT NOT NULL,
+                        heure_debut  TEXT NOT NULL,
+                        heure_fin    TEXT NOT NULL,
+                        type_session TEXT NOT NULL DEFAULT 'CM',
+                        recurrence   TEXT NOT NULL DEFAULT 'HEBDOMADAIRE',
+                        FOREIGN KEY (course_id)    REFERENCES courses(id),
+                        FOREIGN KEY (teacher_id)   REFERENCES teachers(id),
+                        FOREIGN KEY (classroom_id) REFERENCES classrooms(id),
+                        FOREIGN KEY (groupe_id)    REFERENCES groupes(id)
                     );
                 """;
 
         String createExams = """
                     CREATE TABLE IF NOT EXISTS exams (
-                        id INTEGER PRIMARY KEY AUTOINCREMENT,
-                        course_id INTEGER NOT NULL,
-                        date TEXT NOT NULL,
-                        heure TEXT NOT NULL,
+                        id           INTEGER PRIMARY KEY AUTOINCREMENT,
+                        course_id    INTEGER NOT NULL,
+                        date         TEXT NOT NULL,
+                        heure        TEXT NOT NULL,
                         classroom_id INTEGER NOT NULL,
-                        FOREIGN KEY (course_id) REFERENCES courses(id),
+                        FOREIGN KEY (course_id)    REFERENCES courses(id),
                         FOREIGN KEY (classroom_id) REFERENCES classrooms(id)
                     );
                 """;
@@ -100,8 +118,40 @@ public class DatabaseConnection {
             stmt.execute(createCourses);
             stmt.execute(createTeachers);
             stmt.execute(createClassrooms);
+            stmt.execute(createGroupes);
             stmt.execute(createPlanning);
             stmt.execute(createExams);
+        }
+
+        // Migration douce : ajouter les colonnes si la BDD existait déjà
+        migrateIfNeeded();
+    }
+
+    /**
+     * Migration douce pour les bases existantes.
+     * SQLite ne supporte pas ALTER COLUMN, mais supporte ADD COLUMN.
+     * On tente d'ajouter les nouvelles colonnes ; si elles existent déjà,
+     * l'exception est silencieusement ignorée.
+     */
+    private void migrateIfNeeded() {
+        String[] migrations = {
+                "ALTER TABLE planning ADD COLUMN groupe_id    INTEGER",
+                "ALTER TABLE planning ADD COLUMN heure_debut  TEXT NOT NULL DEFAULT '08:00'",
+                "ALTER TABLE planning ADD COLUMN heure_fin    TEXT NOT NULL DEFAULT '10:00'",
+                "ALTER TABLE planning ADD COLUMN type_session TEXT NOT NULL DEFAULT 'CM'",
+                "ALTER TABLE planning ADD COLUMN recurrence   TEXT NOT NULL DEFAULT 'HEBDOMADAIRE'"
+        };
+
+        try (Statement stmt = connection.createStatement()) {
+            for (String sql : migrations) {
+                try {
+                    stmt.execute(sql);
+                } catch (SQLException ignored) {
+                    // Colonne déjà existante — normal lors des lancements suivants
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Erreur de migration : " + e.getMessage());
         }
     }
 

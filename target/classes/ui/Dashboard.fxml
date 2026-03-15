@@ -20,6 +20,24 @@
                     <Label text="PlanifyEdu" styleClass="app-title"/>
                     <Label text="Système de gestion de planification universitaire" styleClass="app-subtitle"/>
                 </VBox>
+                <HBox HBox.hgrow="ALWAYS"/>
+                <!-- Infos utilisateur + actions rapides -->
+                <HBox spacing="12" alignment="CENTER_RIGHT">
+                    <VBox alignment="CENTER_RIGHT" spacing="2">
+                        <Label fx:id="labelUtilisateur" text="" styleClass="app-subtitle" style="-fx-text-fill: #e2e8f0; -fx-font-weight: bold;"/>
+                        <Label fx:id="labelRole" text="" style="-fx-text-fill: #6366f1; -fx-font-size: 11px;"/>
+                    </VBox>
+                    <Button text="📄  Exporter PDF"
+                            onAction="#exporterPdf"
+                            style="-fx-background-color: rgba(16,185,129,0.2); -fx-text-fill: #34d399;
+                                   -fx-border-color: #10b981; -fx-border-width: 1; -fx-border-radius: 8;
+                                   -fx-background-radius: 8; -fx-font-size: 12px; -fx-padding: 8 16 8 16; -fx-cursor: hand;"/>
+                    <Button text="🚪  Déconnexion"
+                            onAction="#seDeconnecter"
+                            style="-fx-background-color: rgba(239,68,68,0.15); -fx-text-fill: #f87171;
+                                   -fx-border-color: #dc2626; -fx-border-width: 1; -fx-border-radius: 8;
+                                   -fx-background-radius: 8; -fx-font-size: 12px; -fx-padding: 8 16 8 16; -fx-cursor: hand;"/>
+                </HBox>
             </HBox>
         </VBox>
     </top>
@@ -50,6 +68,11 @@
                             <Label text="Salles" styleClass="stat-label"/>
                         </VBox>
                         <VBox styleClass="stat-card" alignment="CENTER">
+                            <Label text="👥" styleClass="stat-icon"/>
+                            <Label fx:id="labelGroupes" text="0" styleClass="stat-number"/>
+                            <Label text="Groupes" styleClass="stat-label"/>
+                        </VBox>
+                        <VBox styleClass="stat-card" alignment="CENTER">
                             <Label text="📅" styleClass="stat-icon"/>
                             <Label fx:id="labelPlannings" text="0" styleClass="stat-number"/>
                             <Label text="Horaires" styleClass="stat-label"/>
@@ -72,31 +95,31 @@
                             <ColumnConstraints percentWidth="33.33"/>
                         </columnConstraints>
 
-                        <VBox styleClass="action-card" onMouseClicked="#ouvrirAjouterCours" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                        <VBox styleClass="action-card" fx:id="cardAjouterCours" onMouseClicked="#ouvrirAjouterCours" GridPane.columnIndex="0" GridPane.rowIndex="0">
                             <Label text="📚" styleClass="action-icon"/>
                             <Label text="Ajouter un cours" styleClass="action-title"/>
                             <Label text="Créer un nouveau cours dans le catalogue" styleClass="action-desc"/>
                         </VBox>
 
-                        <VBox styleClass="action-card" onMouseClicked="#ouvrirAjouterEnseignant" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                        <VBox styleClass="action-card" fx:id="cardAjouterEnseignant" onMouseClicked="#ouvrirAjouterEnseignant" GridPane.columnIndex="1" GridPane.rowIndex="0">
                             <Label text="👨‍🏫" styleClass="action-icon"/>
                             <Label text="Ajouter un enseignant" styleClass="action-title"/>
                             <Label text="Enregistrer un nouvel enseignant" styleClass="action-desc"/>
                         </VBox>
 
-                        <VBox styleClass="action-card" onMouseClicked="#ouvrirAjouterSalle" GridPane.columnIndex="2" GridPane.rowIndex="0">
+                        <VBox styleClass="action-card" fx:id="cardAjouterSalle" onMouseClicked="#ouvrirAjouterSalle" GridPane.columnIndex="2" GridPane.rowIndex="0">
                             <Label text="🏫" styleClass="action-icon"/>
                             <Label text="Ajouter une salle" styleClass="action-title"/>
                             <Label text="Configurer une nouvelle salle de classe" styleClass="action-desc"/>
                         </VBox>
 
-                        <VBox styleClass="action-card accent-card" onMouseClicked="#ouvrirCreerHoraire" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                        <VBox styleClass="action-card accent-card" fx:id="cardCreerHoraire" onMouseClicked="#ouvrirCreerHoraire" GridPane.columnIndex="0" GridPane.rowIndex="1">
                             <Label text="📅" styleClass="action-icon"/>
                             <Label text="Créer un horaire" styleClass="action-title"/>
                             <Label text="Planifier un cours pour un enseignant" styleClass="action-desc"/>
                         </VBox>
 
-                        <VBox styleClass="action-card accent-card" onMouseClicked="#ouvrirPlanifierExamen" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <VBox styleClass="action-card accent-card" fx:id="cardPlanifierExamen" onMouseClicked="#ouvrirPlanifierExamen" GridPane.columnIndex="1" GridPane.rowIndex="1">
                             <Label text="📝" styleClass="action-icon"/>
                             <Label text="Planifier un examen" styleClass="action-title"/>
                             <Label text="Programmer un examen dans une salle" styleClass="action-desc"/>
@@ -105,8 +128,21 @@
                         <VBox styleClass="action-card view-card" onMouseClicked="#ouvrirVoirHoraires" GridPane.columnIndex="2" GridPane.rowIndex="1">
                             <Label text="🗓" styleClass="action-icon"/>
                             <Label text="Voir les horaires" styleClass="action-title"/>
-                            <Label text="Visualiser tous les plannings" styleClass="action-desc"/>
+                            <Label text="Visualiser tous les plannings (liste)" styleClass="action-desc"/>
                         </VBox>
+
+                        <!-- Ligne 3 : Calendrier -->
+                        <VBox styleClass="action-card calendar-card" onMouseClicked="#ouvrirCalendrier"
+                              GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.columnSpan="3">
+                            <HBox alignment="CENTER_LEFT" spacing="16">
+                                <Label text="📆" styleClass="action-icon"/>
+                                <VBox>
+                                    <Label text="Vue Calendrier Hebdomadaire" styleClass="action-title"/>
+                                    <Label text="Visualiser le planning sous forme de semainier coloré avec détection des conflits en temps réel" styleClass="action-desc"/>
+                                </VBox>
+                            </HBox>
+                        </VBox>
+
                     </GridPane>
                 </VBox>
 

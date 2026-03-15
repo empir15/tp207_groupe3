@@ -62,7 +62,7 @@ echo [3/3] Compilation du projet...
 REM Collecter tous les fichiers .java
 dir /s /b "%SRC_DIR%\*.java" > "%OUT_DIR%\sources.txt"
 
-javac --module-path "%JAVAFX_MODS%" --add-modules %JAVAFX_MODULES% -cp "%SQLITE_JAR%;%SLF4J_API%;%SLF4J_SIMPLE%" -d "%CLASSES_DIR%" @"%OUT_DIR%\sources.txt"
+javac -encoding UTF-8 --module-path "%JAVAFX_MODS%" --add-modules %JAVAFX_MODULES% -cp "%SQLITE_JAR%;%SLF4J_API%;%SLF4J_SIMPLE%" -d "%CLASSES_DIR%" @"%OUT_DIR%\sources.txt"
 
 if %ERRORLEVEL% NEQ 0 (
     echo.

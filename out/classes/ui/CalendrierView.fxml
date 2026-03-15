@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.CalendrierController"
+            styleClass="root-pane"
+            stylesheets="@../styles/style.css"
+            prefWidth="1200" prefHeight="820">
+
+    <!-- ===== HEADER ===== -->
+    <top>
+        <VBox styleClass="sub-header" spacing="12">
+            <padding><Insets top="16" right="24" bottom="16" left="24"/></padding>
+            <HBox alignment="CENTER_LEFT" spacing="20">
+                <Label text="🗓  Calendrier Hebdomadaire" styleClass="page-title"/>
+                <HBox HBox.hgrow="ALWAYS"/>
+                <!-- Filtres -->
+                <HBox spacing="10" alignment="CENTER_RIGHT">
+                    <Label text="Afficher :" styleClass="field-label"/>
+                    <ComboBox fx:id="comboFiltre" styleClass="form-combo" prefWidth="200"/>
+                    <ComboBox fx:id="comboGroupe" styleClass="form-combo" prefWidth="220"
+                              promptText="Choisir un groupe..."/>
+                    <Button text="🔄  Rafraîchir" styleClass="btn-primary" onAction="#rafraichir"/>
+                </HBox>
+            </HBox>
+        </VBox>
+    </top>
+
+    <!-- ===== CALENDRIER ===== -->
+    <center>
+        <VBox spacing="0">
+            <!-- Légende des cours (remplie dynamiquement) -->
+            <HBox fx:id="legendeBox" spacing="16" alignment="CENTER_LEFT"
+                  style="-fx-background-color: #1a1f2e; -fx-border-color: transparent transparent #2d3748 transparent; -fx-border-width: 0 0 1 0; -fx-padding: 10 24 10 24;">
+                <!-- Contenu injecté depuis le controller -->
+            </HBox>
+
+            <!-- Grille du calendrier (construite dynamiquement) -->
+            <ScrollPane fx:id="scrollCalendrier"
+                        fitToWidth="true"
+                        styleClass="scroll-area"
+                        VBox.vgrow="ALWAYS"/>
+        </VBox>
+    </center>
+
+    <!-- ===== STATUS BAR ===== -->
+    <bottom>
+        <HBox styleClass="status-bar" alignment="CENTER_LEFT" spacing="20">
+            <padding><Insets top="8" right="16" bottom="8" left="16"/></padding>
+            <Label fx:id="labelInfo" text="" styleClass="status-label"/>
+            <HBox HBox.hgrow="ALWAYS"/>
+            <!-- Légende des types -->
+            <HBox spacing="16" alignment="CENTER_RIGHT">
+                <Label text="■ CM" style="-fx-text-fill: #818cf8; -fx-font-size: 12px; -fx-font-weight: bold;"/>
+                <Label text="■ TD" style="-fx-text-fill: #34d399; -fx-font-size: 12px; -fx-font-weight: bold;"/>
+                <Label text="■ TP" style="-fx-text-fill: #fbbf24; -fx-font-size: 12px; -fx-font-weight: bold;"/>
+            </HBox>
+        </HBox>
+    </bottom>
+
+</BorderPane>

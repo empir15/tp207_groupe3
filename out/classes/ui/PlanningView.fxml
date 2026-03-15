@@ -9,7 +9,7 @@
             fx:controller="controller.PlanningController"
             styleClass="root-pane"
             stylesheets="@../styles/style.css"
-            prefWidth="950" prefHeight="680">
+            prefWidth="1100" prefHeight="780">
 
     <top>
         <VBox styleClass="sub-header">
@@ -21,16 +21,18 @@
         <VBox spacing="20" styleClass="main-content">
             <padding><Insets top="24" right="24" bottom="24" left="24"/></padding>
 
-            <!-- Formulaire -->
+            <!-- Formulaire enrichi -->
             <VBox styleClass="form-card" spacing="16">
-                <Label text="Créer un nouvel horaire" styleClass="form-title"/>
+                <Label text="Planifier une nouvelle session" styleClass="form-title"/>
                 <GridPane hgap="16" vgap="12">
                     <columnConstraints>
-                        <ColumnConstraints percentWidth="33"/>
-                        <ColumnConstraints percentWidth="33"/>
-                        <ColumnConstraints percentWidth="34"/>
+                        <ColumnConstraints percentWidth="25"/>
+                        <ColumnConstraints percentWidth="25"/>
+                        <ColumnConstraints percentWidth="25"/>
+                        <ColumnConstraints percentWidth="25"/>
                     </columnConstraints>
 
+                    <!-- Ligne 1 : Cours, Enseignant, Salle, Groupe -->
                     <VBox spacing="6" GridPane.columnIndex="0" GridPane.rowIndex="0">
                         <Label text="Cours *" styleClass="field-label"/>
                         <ComboBox fx:id="comboCours" styleClass="form-combo" maxWidth="Infinity"/>
@@ -43,33 +45,58 @@
                         <Label text="Salle *" styleClass="field-label"/>
                         <ComboBox fx:id="comboSalle" styleClass="form-combo" maxWidth="Infinity"/>
                     </VBox>
+                    <VBox spacing="6" GridPane.columnIndex="3" GridPane.rowIndex="0">
+                        <Label text="Groupe (optionnel)" styleClass="field-label"/>
+                        <ComboBox fx:id="comboGroupe" styleClass="form-combo" maxWidth="Infinity"/>
+                    </VBox>
+
+                    <!-- Ligne 2 : Jour, Heure début, Heure fin, Type session -->
                     <VBox spacing="6" GridPane.columnIndex="0" GridPane.rowIndex="1">
                         <Label text="Jour *" styleClass="field-label"/>
                         <ComboBox fx:id="comboJour" styleClass="form-combo" maxWidth="Infinity"/>
                     </VBox>
                     <VBox spacing="6" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                        <Label text="Heure *" styleClass="field-label"/>
-                        <ComboBox fx:id="comboHeure" styleClass="form-combo" maxWidth="Infinity"/>
+                        <Label text="Heure de début *" styleClass="field-label"/>
+                        <ComboBox fx:id="comboHeureDebut" styleClass="form-combo" maxWidth="Infinity"/>
                     </VBox>
-                    <HBox alignment="BOTTOM_LEFT" spacing="10" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                        <Button text="➕  Créer l'horaire" styleClass="btn-primary" onAction="#ajouterPlanning"/>
+                    <VBox spacing="6" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                        <Label text="Heure de fin *" styleClass="field-label"/>
+                        <ComboBox fx:id="comboHeureFin" styleClass="form-combo" maxWidth="Infinity"/>
+                    </VBox>
+                    <VBox spacing="6" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                        <Label text="Type de session *" styleClass="field-label"/>
+                        <ComboBox fx:id="comboTypeSession" styleClass="form-combo" maxWidth="Infinity"/>
+                    </VBox>
+
+                    <!-- Ligne 3 : Récurrence + Bouton -->
+                    <VBox spacing="6" GridPane.columnIndex="0" GridPane.rowIndex="2">
+                        <Label text="Récurrence *" styleClass="field-label"/>
+                        <ComboBox fx:id="comboRecurrence" styleClass="form-combo" maxWidth="Infinity"/>
+                    </VBox>
+                    <HBox alignment="BOTTOM_LEFT" spacing="10"
+                          GridPane.columnIndex="3" GridPane.rowIndex="2">
+                        <Button text="➕  Planifier la session" styleClass="btn-primary"
+                                onAction="#ajouterPlanning" maxWidth="Infinity"/>
                     </HBox>
                 </GridPane>
             </VBox>
 
-            <!-- Table -->
+            <!-- Tableau enrichi -->
             <VBox VBox.vgrow="ALWAYS" styleClass="table-card" spacing="12">
-                <Label text="Horaires planifiés" styleClass="card-title"/>
+                <Label text="Sessions planifiées" styleClass="card-title"/>
                 <TableView fx:id="tablePlanning" VBox.vgrow="ALWAYS" styleClass="data-table">
                     <columns>
-                        <TableColumn fx:id="colId" text="ID" prefWidth="55"/>
-                        <TableColumn fx:id="colCours" text="Cours" prefWidth="200"/>
-                        <TableColumn fx:id="colEnseignant" text="Enseignant" prefWidth="180"/>
-                        <TableColumn fx:id="colSalle" text="Salle" prefWidth="140"/>
-                        <TableColumn fx:id="colJour" text="Jour" prefWidth="110"/>
-                        <TableColumn fx:id="colHeure" text="Heure" prefWidth="90"/>
+                        <TableColumn fx:id="colId"          text="ID"          prefWidth="50"/>
+                        <TableColumn fx:id="colType"        text="Type"        prefWidth="65"/>
+                        <TableColumn fx:id="colCours"       text="Cours"       prefWidth="190"/>
+                        <TableColumn fx:id="colEnseignant"  text="Enseignant"  prefWidth="170"/>
+                        <TableColumn fx:id="colGroupe"      text="Groupe"      prefWidth="140"/>
+                        <TableColumn fx:id="colSalle"       text="Salle"       prefWidth="110"/>
+                        <TableColumn fx:id="colJour"        text="Jour"        prefWidth="100"/>
+                        <TableColumn fx:id="colHeure"       text="Horaire"     prefWidth="120"/>
+                        <TableColumn fx:id="colRecurrence"  text="Récurrence"  prefWidth="150"/>
                     </columns>
-                    <placeholder><Label text="Aucun horaire planifié." styleClass="empty-label"/></placeholder>
+                    <placeholder><Label text="Aucune session planifiée." styleClass="empty-label"/></placeholder>
                 </TableView>
                 <Button text="🗑  Supprimer la sélection" styleClass="btn-danger" onAction="#supprimerPlanning"/>
             </VBox>

@@ -5,6 +5,10 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import database.DatabaseConnection;
 
+/**
+ * Point d'entrée de PlanifyEdu.
+ * Lance l'écran de connexion en premier.
+ */
 public class MainApp extends Application {
 
     @Override
@@ -12,15 +16,16 @@ public class MainApp extends Application {
         // Initialiser la base de données au démarrage
         DatabaseConnection.getInstance();
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/Dashboard.fxml"));
+        // Démarrer sur l'écran de connexion
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/LoginView.fxml"));
         Parent root = loader.load();
 
-        Scene scene = new Scene(root, 1200, 750);
+        Scene scene = new Scene(root, 900, 640);
 
-        primaryStage.setTitle("PlanifyEdu — Gestion de Planification Universitaire");
+        primaryStage.setTitle("PlanifyEdu — Connexion");
         primaryStage.setScene(scene);
-        primaryStage.setMinWidth(900);
-        primaryStage.setMinHeight(600);
+        primaryStage.setMinWidth(700);
+        primaryStage.setMinHeight(500);
         primaryStage.centerOnScreen();
         primaryStage.show();
     }

@@ -24,7 +24,7 @@
     -fx-padding: 20 32 20 32;
     -fx-border-color: #2d3748;
     -fx-border-width: 0 0 1 0;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 8, 0, 0, 2);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 8, 0, 0, 2);
 }
 
 .app-title {
@@ -62,7 +62,8 @@
     -fx-background-color: #0f1117;
     -fx-background: #0f1117;
 }
-.scroll-area > .viewport {
+
+.scroll-area>.viewport {
     -fx-background-color: #0f1117;
 }
 
@@ -83,14 +84,14 @@
     -fx-padding: 20 24 20 24;
     -fx-pref-width: 160;
     -fx-spacing: 6;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 6, 0, 0, 2);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 6, 0, 0, 2);
     -fx-cursor: hand;
 }
 
 .stat-card:hover {
     -fx-background-color: #252b3b;
     -fx-border-color: #6366f1;
-    -fx-effect: dropshadow(gaussian, rgba(99,102,241,0.3), 12, 0.2, 0, 0);
+    -fx-effect: dropshadow(gaussian, rgba(99, 102, 241, 0.3), 12, 0.2, 0, 0);
 }
 
 .stat-icon {
@@ -118,13 +119,13 @@
     -fx-padding: 20;
     -fx-spacing: 8;
     -fx-cursor: hand;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 4, 0, 0, 1);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 4, 0, 0, 1);
 }
 
 .action-card:hover {
     -fx-background-color: #252b3b;
     -fx-border-color: #6366f1;
-    -fx-effect: dropshadow(gaussian, rgba(99,102,241,0.25), 16, 0.2, 0, 2);
+    -fx-effect: dropshadow(gaussian, rgba(99, 102, 241, 0.25), 16, 0.2, 0, 2);
     -fx-translate-y: -2;
 }
 
@@ -172,7 +173,7 @@
     -fx-border-radius: 12;
     -fx-border-width: 1;
     -fx-padding: 20;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 6, 0, 0, 2);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);
 }
 
 .form-title {
@@ -201,7 +202,7 @@
 
 .form-input:focused {
     -fx-border-color: #6366f1;
-    -fx-effect: dropshadow(gaussian, rgba(99,102,241,0.3), 6, 0, 0, 0);
+    -fx-effect: dropshadow(gaussian, rgba(99, 102, 241, 0.3), 6, 0, 0, 0);
 }
 
 .form-textarea {
@@ -270,12 +271,12 @@
     -fx-font-weight: bold;
     -fx-padding: 10 20 10 20;
     -fx-cursor: hand;
-    -fx-effect: dropshadow(gaussian, rgba(99,102,241,0.4), 6, 0, 0, 2);
+    -fx-effect: dropshadow(gaussian, rgba(99, 102, 241, 0.4), 6, 0, 0, 2);
 }
 
 .btn-primary:hover {
     -fx-background-color: #4f46e5;
-    -fx-effect: dropshadow(gaussian, rgba(99,102,241,0.6), 10, 0.2, 0, 2);
+    -fx-effect: dropshadow(gaussian, rgba(99, 102, 241, 0.6), 10, 0.2, 0, 2);
 }
 
 .btn-primary:pressed {
@@ -291,12 +292,12 @@
     -fx-font-weight: bold;
     -fx-padding: 10 20 10 20;
     -fx-cursor: hand;
-    -fx-effect: dropshadow(gaussian, rgba(220,38,38,0.4), 6, 0, 0, 2);
+    -fx-effect: dropshadow(gaussian, rgba(220, 38, 38, 0.4), 6, 0, 0, 2);
 }
 
 .btn-danger:hover {
     -fx-background-color: #b91c1c;
-    -fx-effect: dropshadow(gaussian, rgba(220,38,38,0.6), 10, 0.2, 0, 2);
+    -fx-effect: dropshadow(gaussian, rgba(220, 38, 38, 0.6), 10, 0.2, 0, 2);
 }
 
 /* ===== TABLE CARD ===== */
@@ -403,9 +404,9 @@
     -fx-border-width: 0 0 2 0;
 }
 
-.main-tabs .tab:hover:!selected {
+.main-tabs .tab:hover: !selected {
     -fx-text-fill: #e2e8f0;
-    -fx-background-color: rgba(255,255,255,0.05);
+    -fx-background-color: rgba(255, 255, 255, 0.05);
 }
 
 .main-tabs .tab .tab-label {
@@ -479,4 +480,92 @@
     -fx-text-fill: #475569;
     -fx-font-size: 13px;
     -fx-font-style: italic;
+}
+
+/* ===== BADGES TYPE DE SESSION ===== */
+.badge-cm {
+    -fx-background-color: rgba(99, 102, 241, 0.2);
+    -fx-background-radius: 4;
+    -fx-border-color: #6366f1;
+    -fx-border-radius: 4;
+    -fx-border-width: 1;
+    -fx-text-fill: #818cf8;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-padding: 2 8 2 8;
+}
+
+.badge-td {
+    -fx-background-color: rgba(16, 185, 129, 0.2);
+    -fx-background-radius: 4;
+    -fx-border-color: #10b981;
+    -fx-border-radius: 4;
+    -fx-border-width: 1;
+    -fx-text-fill: #34d399;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-padding: 2 8 2 8;
+}
+
+.badge-tp {
+    -fx-background-color: rgba(245, 158, 11, 0.2);
+    -fx-background-radius: 4;
+    -fx-border-color: #f59e0b;
+    -fx-border-radius: 4;
+    -fx-border-width: 1;
+    -fx-text-fill: #fbbf24;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-padding: 2 8 2 8;
+}
+
+/* ===== DIALOG CONFLITS ===== */
+.dialog-pane {
+    -fx-background-color: #1e2433;
+    -fx-border-color: #2d3748;
+}
+
+.dialog-pane .header-panel {
+    -fx-background-color: #252b3b;
+}
+
+.dialog-pane .header-panel .label {
+    -fx-text-fill: #e2e8f0;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.dialog-pane .content.label {
+    -fx-text-fill: #94a3b8;
+}
+
+.dialog-pane .button-bar .button {
+    -fx-background-color: #6366f1;
+    -fx-text-fill: white;
+    -fx-background-radius: 6;
+    -fx-font-weight: bold;
+}
+
+/* ===== LIGNE CONFLIT (alerte inline dans tableau) ===== */
+.row-conflict {
+    -fx-background-color: rgba(239, 68, 68, 0.08);
+}
+
+/* ===== CARTE CALENDRIER (pleine largeur dans le dashboard) ===== */
+.calendar-card {
+    -fx-background-color: linear-gradient(to right, #1a1d35, #1f1a33);
+    -fx-background-radius: 12;
+    -fx-border-color: #4f46e5;
+    -fx-border-radius: 12;
+    -fx-border-width: 1;
+    -fx-padding: 18 24 18 24;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(99, 102, 241, 0.25), 12, 0.1, 0, 2);
+}
+
+.calendar-card:hover {
+    -fx-background-color: linear-gradient(to right, #1f2240, #241e3d);
+    -fx-border-color: #818cf8;
+    -fx-effect: dropshadow(gaussian, rgba(99, 102, 241, 0.5), 20, 0.2, 0, 3);
+    -fx-translate-y: -2;
 }
